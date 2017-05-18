@@ -1,21 +1,48 @@
-// let express = require('express');
-// let app = express();
+let express = require('express');
+let app = express();
+let request = require('request');
 
-// app.get('/', function (req, res) {
-//     res.send('Hello World!')
-// });
+// function analyse_date(date) {
+//     let year = date.getFullYear();
+//     let month = date.getMonth();
+//     let day = date.getDate();
+//     let time = date.getTime();
+//     let hour = date.getHours();
+//     let minute = date.getMinutes();
+//     let second = date.getSeconds();
+//     //change the return values to what you want
+//     return [year, month, day];
+// }
 
-// app.listen(3000, function () {
-//     console.log('Example app listening on port 3000!')
-// });
+app.get('/:date_str', function (req, res) {
 
-var JSON_obj = { "name":"John", "age":30, "car":null };
-var JS_obj = { name:"John", age:30, car:null };
-console.log("JSON output");
-console.log(JSON_obj);
-console.log(JSON_obj.name);
-console.log(JSON.stringify(JSON_obj));
-console.log("Javascript output");
-console.log(JS_obj);
-console.log(JS_obj.name);
-console.log(JSON.stringify(JS_obj));
+    // let result = {unix: 0,
+    //               natural: ""};
+    // var month_names = ["January", "February", "March", "April", "May", "June",
+    //                   "July", "August", "September", "October", "November", "December"];
+    // let date_unix = parseInt(req.params.date_str);
+    // let date_iso = parseInt(date_unix*1000);//convert to miliseconds
+    // let date_obj = new Date(date_iso);
+    // if (JSON.stringify(date_obj) == "null") { //input is not correct
+    //     result.unix = null;
+    //     result.natural = null;
+    // } else {
+    //     result.unix = date_unix;
+    //     let [year, month_idx, day] = analyse_date(date_obj);
+    //     let month = month_names[month_idx];
+    //     result.natural = month + " " + day + ", " + year;
+    // }
+
+    let api_ext = "https://timestamp-ms.herokuapp.com/";
+    let req_link = api_ext + req.params.date_str;
+    request(req_link, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.end(body);
+        }
+    });
+});
+
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+});
+
