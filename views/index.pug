@@ -2,5 +2,17 @@ doctype html
 html
     head
         title="Timestamp microservice"
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
     body
-        h1 This is a test page!
+        h1 Timestamp microservice
+        h3 (Freecodecamp API challenge)
+        blockquote User stories:
+        ol
+            li I can pass a string as a parameter, and it will check to see whether that string contains either a Unix timestamp (e.g., 1495158122) or a natural language date (e.g., May 19, 2017).
+
+            li If it does, it returns both the Unix timestamp and the natural language form of that date.
+            li If it does not contain a date or Unix timestamp, it returns null for those properties.
+        h3 Example usage:
+        code https://vast-fjord-19786.herokuapp.com/1495158122
+        br
+        code https://vast-fjord-19786.herokuapp.com/may%2019,%202017
